@@ -44,28 +44,31 @@ export default function Navbar() {
             }`}
         >
           {/* Brand Logo & Name */}
-          <Link to="/" className="flex items-center gap-2.5 shrink-0 group py-0.5">
+
+          <Link
+            to="/"
+            className="flex items-center shrink-0 group h-9 overflow-visible"
+          >
             <img
-              src="/everbloom/logo.png"
+              src="/everbloom/MYLOGO.png"
               alt="Everbloom"
-              className="h-8 sm:h-9 w-auto object-contain group-hover:scale-105 transition-transform"
+              className="h-9 sm:h-10 w-auto object-contain scale-[3] origin-left transition-transform"
             />
-            <span className="font-serif font-bold text-sm sm:text-base tracking-[0.2em] text-[#1c1109] uppercase whitespace-nowrap">
-              EVERBLOOM
-            </span>
           </Link>
 
-          {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center gap-6 lg:gap-8">
+
+
+          {/* Desktop Nav Links (Visible on Large Screens) */}
+          <div className="hidden lg:flex items-center gap-5 xl:gap-8">
             {navLinks.map((link) => {
               const active = location.pathname === link.path;
               return (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`text-xs tracking-[0.15em] font-semibold transition-colors duration-200 uppercase relative py-1 ${active
-                      ? "text-[#c88242]"
-                      : "text-[#4a3b32] hover:text-[#1c1109]"
+                  className={`font-display text-[13px] tracking-[0.15em] font-bold transition-colors duration-200 uppercase relative py-1 ${active
+                    ? "text-[#c88242]"
+                    : "text-[#4a3b32] hover:text-[#1c1109]"
                     }`}
                 >
                   {link.label}
@@ -81,15 +84,15 @@ export default function Navbar() {
           <div className="flex items-center gap-2 sm:gap-3">
             <Link
               to="/booking"
-              className="hidden sm:inline-flex items-center justify-center px-5 py-2 rounded-full bg-[#1c1109] hover:bg-[#2e1c10] active:scale-95 text-white text-xs font-bold tracking-[0.14em] uppercase transition-all duration-200 shadow-md"
+              className="hidden sm:inline-flex items-center justify-center px-4 sm:px-5 py-2 rounded-full bg-[#1c1109] hover:bg-[#2e1c10] active:scale-95 text-white font-display text-[13px] font-extrabold tracking-[0.14em] uppercase transition-all duration-200 shadow-md whitespace-nowrap"
             >
               BOOK TABLE
             </Link>
 
-            {/* Mobile Hamburger Button */}
+            {/* Mobile & Tablet Hamburger Button */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 rounded-full text-[#1c1109] hover:bg-black/5 active:scale-95 transition-all"
+              className="lg:hidden p-2 rounded-full text-[#1c1109] hover:bg-black/5 active:scale-95 transition-all"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X className="w-5 h-5 text-[#c88242]" /> : <Menu className="w-5 h-5" />}
@@ -98,10 +101,10 @@ export default function Navbar() {
         </nav>
       </header>
 
-      {/* Mobile Drawer Overlay */}
+      {/* Mobile & Tablet Drawer Overlay */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-40 bg-black/60 backdrop-blur-md pt-20 px-4 pb-6 flex flex-col justify-between animate-fade-in-down md:hidden">
-          <div className="bg-white rounded-3xl p-6 border border-[#e8ded3] shadow-2xl flex flex-col justify-between h-full max-h-[85vh] overflow-y-auto">
+        <div className="fixed inset-0 z-40 bg-black/60 backdrop-blur-md pt-20 px-4 pb-6 flex flex-col justify-center items-center animate-fade-in-down lg:hidden">
+          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#e8ded3] shadow-2xl flex flex-col justify-between w-full max-w-lg max-h-[85vh] overflow-y-auto">
             <div>
               {/* Header inside drawer */}
               <div className="flex items-center justify-between pb-4 border-b border-[#f0e6dc] mb-4">
@@ -120,7 +123,7 @@ export default function Navbar() {
                 </div>
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="w-8 h-8 rounded-full bg-[#faf7f2] flex items-center justify-center text-[#1c1109]"
+                  className="w-9 h-9 rounded-full bg-[#faf7f2] flex items-center justify-center text-[#1c1109] hover:bg-[#f0e6dc] transition-colors"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -135,9 +138,9 @@ export default function Navbar() {
                       key={link.path}
                       to={link.path}
                       onClick={() => setMobileOpen(false)}
-                      className={`px-4 py-3 text-xs font-bold tracking-[0.14em] uppercase rounded-2xl transition-all flex items-center justify-between ${active
-                          ? "bg-[#1c1109] text-white shadow-md"
-                          : "text-[#3d2e26] hover:bg-[#faf7f2]"
+                      className={`px-4 py-3 font-display text-[13px] font-extrabold tracking-[0.14em] uppercase rounded-2xl transition-all flex items-center justify-between ${active
+                        ? "bg-[#1c1109] text-white shadow-md"
+                        : "text-[#3d2e26] hover:bg-[#faf7f2]"
                         }`}
                     >
                       <span>{link.label}</span>
@@ -153,7 +156,7 @@ export default function Navbar() {
               <Link
                 to="/booking"
                 onClick={() => setMobileOpen(false)}
-                className="w-full py-3.5 rounded-full bg-[#d49748] hover:bg-[#e0a455] text-[#1c1109] font-bold text-xs tracking-[0.14em] uppercase text-center shadow-md"
+                className="w-full py-3.5 rounded-full bg-[#d49748] hover:bg-[#e0a455] text-[#1c1109] font-display font-extrabold text-[13px] tracking-[0.14em] uppercase text-center shadow-md"
               >
                 BOOK A TABLE
               </Link>

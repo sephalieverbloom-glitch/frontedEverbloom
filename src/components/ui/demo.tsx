@@ -1,5 +1,9 @@
-import MetroHero from "@/components/ui/scroll-locked-video-hero";
+import CarouselStacked from "@/components/ui/carousel-07";
 
-export default function DemoOne() {
-  return <MetroHero />;
+export default function Default() {
+  return (
+    <div className="w-full">
+      <CarouselStacked />
+    </div>
+  );
 }

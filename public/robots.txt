@@ -1,0 +1,8 @@
+# robots.txt for Everbloom Cafe
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /admin
+
+# Sitemaps
+Sitemap: https://everbloomcafe.in/sitemap.xml

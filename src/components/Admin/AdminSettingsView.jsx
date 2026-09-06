@@ -149,15 +149,20 @@ export default function AdminSettingsView({ adminUser, onSeedMenu }) {
 
           <div className="flex items-center gap-3 text-[#2b1810]">
             <Phone className="w-4 h-4 text-[#c88242] shrink-0" />
-            <span>+91 94371 64578 / 09437164578</span>
+            <span>Primary: +91 94371 64578 &nbsp;|&nbsp; Secondary: +91 97787 95952</span>
           </div>
 
           <div className="flex items-center gap-3 text-[#2b1810]">
             <Clock className="w-4 h-4 text-[#c88242] shrink-0" />
-            <span>Open Daily: 1:00 PM – 10:30 PM (Air-Conditioned Indoor &amp; Garden Patio)</span>
+            <span>Open Daily: 1:00 PM – 11:00 PM (Air-Conditioned Indoor &amp; Nature Garden Patio)</span>
           </div>
 
           <div className="flex items-center gap-3 text-[#2b1810]">
+            <ShieldCheck className="w-4 h-4 text-[#c88242] shrink-0" />
+            <span>Official Email: <strong>everbloombbsr@gmail.com</strong> &nbsp;|&nbsp; Owner: <strong>Sephali Swain</strong> &nbsp;|&nbsp; Est.: <strong>June 27, 2025</strong></span>
+          </div>
+
+          <div className="flex items-center gap-3 text-[#2b1810] pt-2 border-t border-[#f0e6dc]">
             <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
             <span>Logged in as Administrator: {adminUser?.email || "admin@everbloom.com"}</span>
           </div>

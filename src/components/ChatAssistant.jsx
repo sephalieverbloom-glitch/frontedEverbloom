@@ -5,6 +5,15 @@ import { MessageCircle, X, Send, Bot, User, Sparkles } from "lucide-react";
 function getCafeReply(query) {
   const q = query.toLowerCase();
 
+  if (q.includes("owner") || q.includes("founder") || q.includes("who owns") || q.includes("sephali") || q.includes("swain")) {
+    return "Everbloom Café is lovingly owned and founded by Sephali Swain, created as a botanical coffee and culinary sanctuary in Bhubaneswar!";
+  }
+  if (q.includes("start") || q.includes("opening") || q.includes("founded") || q.includes("established") || q.includes("date") || q.includes("since")) {
+    return "Everbloom Café was established on June 27, 2025 (27/06/2025) in Kalinga Nagar, Bhubaneswar.";
+  }
+  if (q.includes("email") || q.includes("mail")) {
+    return "You can email Everbloom Café at everbloombbsr@gmail.com for inquiries, collaborations, and events.";
+  }
   if (q.includes("location") || q.includes("where") || q.includes("address") || q.includes("kalinga")) {
     return "Everbloom Café is located at K-8/796, Near Sum Ultimate Medicare, K8 Kalinga Nagar, Bhubaneswar, Odisha 751029. We're easily accessible with convenient parking!";
   }
@@ -24,19 +33,19 @@ function getCafeReply(query) {
     return "We have both a cozy climate-controlled Indoor AC Lounge with our signature flower mural and a lush Nature Garden Patio with fairy lights that is open-air and pet-friendly!";
   }
   if (q.includes("contact") || q.includes("phone") || q.includes("call") || q.includes("number") || q.includes("whatsapp")) {
-    return "You can call us directly or chat on WhatsApp at +91 94371 64578. We'd love to assist you!";
+    return "You can call us directly or chat on WhatsApp at +91 94371 64578 or +91 97787 95952, or email us at everbloombbsr@gmail.com. We'd love to assist you!";
   }
   if (q.includes("wifi") || q.includes("work") || q.includes("study") || q.includes("laptop")) {
     return "Yes! We provide high-speed complimentary WiFi and comfortable seating zones ideal for remote work, study sessions, and reading.";
   }
   if (q.includes("book") || q.includes("reserve") || q.includes("table") || q.includes("party") || q.includes("birthday")) {
-    return "For table bookings or birthday party arrangements, please reach out to us at +91 94371 64578 or drop a note on our Contact page!";
+    return "For table bookings or birthday party arrangements, please reach out to us at +91 94371 64578 / +91 97787 95952 or drop a note on our Booking or Contact page!";
   }
   if (q.includes("hi") || q.includes("hello") || q.includes("hey") || q.includes("namaste")) {
     return "Hello there! Welcome to Everbloom Café. How can I brighten your day? Feel free to ask about our location, artisanal coffee, gourmet wraps, or timings!";
   }
 
-  return "Thank you for asking! We are located in Kalinga Nagar, Bhubaneswar, open daily from 1 PM to 11 PM. You can explore our Menu page or contact us at 094371 64578 for quick assistance.";
+  return "Thank you for asking! We are located in Kalinga Nagar, Bhubaneswar, open daily from 1 PM to 11 PM. You can explore our Menu page or contact us at +91 94371 64578 / +91 97787 95952 (everbloombbsr@gmail.com) for quick assistance.";
 }
 
 export default function ChatAssistant() {

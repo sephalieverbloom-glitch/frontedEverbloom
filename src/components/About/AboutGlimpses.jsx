@@ -12,13 +12,13 @@ export default function AboutGlimpses() {
   ];
 
   return (
-    <section className="section-padding py-20 lg:py-28 bg-[#180e09] text-white">
+    <section className="section-padding py-20 lg:py-28 bg-gradient-to-b from-[#faf7f2] via-[#f7eee3] to-[#f4ebe0] text-[#1c1109] border-t border-[#e8ded3]">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-14">
-          <span className="badge-tag bg-[#c88242]/20 text-[#e29b5a] mb-3">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#c88242]/15 border border-[#c88242]/30 text-[#b8623b] text-xs font-bold uppercase tracking-wider mb-3">
             Glimpses
           </span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#1c1109]">
             Inside Everbloom Café
           </h2>
         </div>

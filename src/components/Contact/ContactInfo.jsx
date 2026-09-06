@@ -1,4 +1,14 @@
-import { MapPin, Phone, Clock, MessageCircle } from "lucide-react";
+import { MapPin, Phone, Clock, MessageCircle, Mail, User, Calendar } from "lucide-react";
+import {
+  PHONE_PRIMARY,
+  PHONE_SECONDARY,
+  EMAIL,
+  ADDRESS,
+  OWNER_NAME,
+  ESTABLISHED_DATE,
+  ESTABLISHED_DISPLAY,
+} from "../../const";
+
 
 export default function ContactInfo() {
   return (
@@ -20,7 +30,7 @@ export default function ContactInfo() {
             <div>
               <h3 className="font-display text-sm font-bold text-[#2b1810] mb-1">Our Address</h3>
               <p className="text-xs text-[#6b5c54] leading-relaxed">
-                K-8/796, Near Sum Ultimate Medicare, K8 Kalinga Nagar, Bhubaneswar, Odisha 751029
+                {ADDRESS}
               </p>
             </div>
           </div>
@@ -31,14 +41,66 @@ export default function ContactInfo() {
               <Phone className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-display text-sm font-bold text-[#2b1810] mb-1">Phone / WhatsApp</h3>
-              <p className="text-xs text-[#6b5c54] mb-2">Available during café hours</p>
+              <h3 className="font-display text-sm font-bold text-[#2b1810] mb-1">Phone Numbers</h3>
+              <p className="text-xs text-[#6b5c54] mb-2">Call or WhatsApp during café hours</p>
+              <div className="flex flex-wrap gap-x-4 gap-y-1">
+                <a
+                  href="tel:09437164578"
+                  className="text-sm font-bold text-[#2b1810] hover:text-[#c88242] transition-colors"
+                >
+                  {PHONE_PRIMARY}
+                </a>
+                <span className="text-[#c88242] font-bold">•</span>
+                <a
+                  href="tel:09778795952"
+                  className="text-sm font-bold text-[#2b1810] hover:text-[#c88242] transition-colors"
+                >
+                  {PHONE_SECONDARY}
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Email */}
+          <div className="flex items-start gap-4 p-5 rounded-3xl glass-card border border-[#e8ded3]">
+            <div className="w-11 h-11 rounded-2xl bg-[#c88242]/15 flex items-center justify-center text-[#c88242] shrink-0">
+              <Mail className="w-5 h-5" />
+            </div>
+            <div>
+              <h3 className="font-display text-sm font-bold text-[#2b1810] mb-1">Official Email</h3>
               <a
-                href="tel:09437164578"
-                className="text-sm font-bold text-[#2b1810] hover:text-[#c88242] transition-colors inline-block mr-4"
+                href={`mailto:${EMAIL}`}
+                className="text-xs font-bold text-[#2b1810] hover:text-[#c88242] transition-colors"
               >
-                +91 94371 64578
+                {EMAIL}
               </a>
+            </div>
+          </div>
+
+          {/* Owner & Starting Date */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="flex items-start gap-3.5 p-4 rounded-3xl glass-card border border-[#e8ded3]">
+              <div className="w-10 h-10 rounded-2xl bg-[#c88242]/15 flex items-center justify-center text-[#c88242] shrink-0">
+                <User className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="font-display text-xs font-bold text-[#6b5c54] uppercase tracking-wider mb-0.5">Owner</h3>
+                <p className="text-sm font-extrabold text-[#1c1109]">
+                  {OWNER_NAME}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3.5 p-4 rounded-3xl glass-card border border-[#e8ded3]">
+              <div className="w-10 h-10 rounded-2xl bg-[#c88242]/15 flex items-center justify-center text-[#c88242] shrink-0">
+                <Calendar className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="font-display text-xs font-bold text-[#6b5c54] uppercase tracking-wider mb-0.5">Starting Date</h3>
+                <p className="text-sm font-extrabold text-[#1c1109]">
+                  {ESTABLISHED_DATE} <span className="text-xs font-bold text-[#c88242]">({ESTABLISHED_DISPLAY})</span>
+                </p>
+              </div>
             </div>
           </div>
 

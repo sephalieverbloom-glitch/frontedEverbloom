@@ -1,5 +1,14 @@
 import { Link } from "react-router";
-import { MapPin, Phone, Clock, Star, Sparkles, ArrowUpRight } from "lucide-react";
+import { MapPin, Phone, Clock, Star, Sparkles, ArrowUpRight, Mail } from "lucide-react";
+import {
+  PHONE_PRIMARY,
+  PHONE_SECONDARY,
+  EMAIL,
+  ADDRESS,
+  OWNER_NAME,
+  ESTABLISHED_DATE,
+} from "../const";
+
 
 export default function Footer() {
   return (
@@ -15,11 +24,13 @@ export default function Footer() {
             {/* Brand Col */}
             <div className="lg:col-span-4">
               <div className="flex items-center gap-3 mb-4">
-                <img
-                  src="/everbloom/logo.png"
-                  alt="Everbloom Café"
-                  className="h-12 w-auto object-contain drop-shadow-sm"
-                />
+                <div className="bg-white/95 p-2 rounded-full shadow-lg shrink-0 flex items-center justify-center">
+                  <img
+                    src="/everbloom/logo.png"
+                    alt="Everbloom Café"
+                    className="h-10 w-auto object-contain drop-shadow-sm"
+                  />
+                </div>
                 <span className="font-display font-black text-xl text-white">
                   Everbloom <span className="font-bold text-[#e29b5a]">Café</span>
                 </span>
@@ -75,7 +86,7 @@ export default function Footer() {
                   <div>
                     <p className="font-bold text-white">Everbloom Café</p>
                     <p className="text-xs text-white/60 leading-relaxed mt-0.5">
-                      K-8/796, Near Sum Ultimate Medicare, K8 Kalinga Nagar, Bhubaneswar, Odisha 751029
+                      {ADDRESS}
                     </p>
                   </div>
                 </div>
@@ -92,17 +103,34 @@ export default function Footer() {
             {/* Contact & Social */}
             <div className="lg:col-span-3">
               <h4 className="font-display text-base font-bold text-white mb-5">Get in Touch</h4>
-              <div className="flex flex-col gap-3.5">
-                <a
-                  href="tel:09437164578"
-                  className="flex items-center gap-3 p-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#c88242] transition-all group"
-                >
-                  <div className="w-8 h-8 rounded-xl bg-[#c88242]/20 flex items-center justify-center text-[#e29b5a] group-hover:bg-[#c88242] group-hover:text-white transition-colors">
+              <div className="flex flex-col gap-3">
+                <div className="p-3 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-xl bg-[#c88242]/20 flex items-center justify-center text-[#e29b5a] shrink-0 mt-0.5">
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-xs text-white/50">Call Us Directly</p>
-                    <p className="text-sm font-bold text-white">094371 64578</p>
+                    <p className="text-xs text-white/50 mb-1">Call / WhatsApp</p>
+                    <div className="flex flex-col gap-1">
+                      <a href="tel:09437164578" className="text-xs font-bold text-white hover:text-[#e29b5a] transition-colors">
+                        {PHONE_PRIMARY}
+                      </a>
+                      <a href="tel:09778795952" className="text-xs font-bold text-white hover:text-[#e29b5a] transition-colors">
+                        {PHONE_SECONDARY}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <a
+                  href={`mailto:${EMAIL}`}
+                  className="flex items-center gap-3 p-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#c88242] transition-all group"
+                >
+                  <div className="w-8 h-8 rounded-xl bg-[#c88242]/20 flex items-center justify-center text-[#e29b5a] group-hover:bg-[#c88242] group-hover:text-white transition-colors shrink-0">
+                    <Mail className="w-4 h-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-xs text-white/50">Email Us</p>
+                    <p className="text-xs font-bold text-white truncate group-hover:text-[#e29b5a]">{EMAIL}</p>
                   </div>
                 </a>
 
@@ -110,7 +138,7 @@ export default function Footer() {
                   href="https://maps.google.com/?q=Everbloom+Kalinga+Nagar+Bhubaneswar"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3 rounded-2xl bg-[#241610] border border-white/10 hover:border-[#c88242] text-sm font-semibold text-white transition-all shadow-sm"
+                  className="flex items-center justify-between p-3 rounded-2xl bg-[#241610] border border-white/10 hover:border-[#c88242] text-xs font-semibold text-white transition-all shadow-sm"
                 >
                   <span className="flex items-center gap-2">
                     <MapPin className="w-4 h-4 text-[#e29b5a]" /> Open in Google Maps
@@ -123,7 +151,9 @@ export default function Footer() {
 
           {/* Bottom Bar */}
           <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
-            <p>&copy; {new Date().getFullYear()} Everbloom Café. All rights reserved. Bhubaneswar, Odisha.</p>
+            <p>
+              &copy; {new Date().getFullYear()} Everbloom Café. Started: <strong className="text-white font-extrabold">{ESTABLISHED_DATE}</strong> &nbsp;|&nbsp; Owner: <strong className="text-white font-extrabold">{OWNER_NAME}</strong>. All rights reserved. Bhubaneswar, Odisha.
+            </p>
             <div className="flex items-center gap-6">
               <span className="text-white/60">Air-Conditioned Indoor &amp; Nature Outdoor Patio</span>
               <Link to="/admin" className="text-white/40 hover:text-[#e29b5a] transition-colors">
