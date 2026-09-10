@@ -195,44 +195,59 @@ export default function PopupSection({ popups = [], onRefresh }) {
         </div>
 
         {activePopup ? (
-          <div className="max-w-md mx-auto bg-[#1a0e09] text-white border border-[#e8ded3] rounded-3xl overflow-hidden shadow-xl">
+          <div className="max-w-[360px] mx-auto bg-[#1a0e08] text-white rounded-[22px] overflow-hidden border border-white/10 shadow-2xl">
             {activePopup.imageUrl && (
-              <div className="relative h-44 w-full bg-black/50 overflow-hidden">
+              <div className="relative h-40 w-full bg-[#120a06] overflow-hidden">
                 <img
                   src={activePopup.imageUrl}
                   alt={activePopup.title}
                   className="w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1a0e08] via-[#1a0e08]/60 to-transparent pointer-events-none" />
                 <div className="absolute top-3 left-3">
-                  <span className="badge-tag bg-[#c88242] text-white text-[10px] flex items-center gap-1 shadow-md">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#c87935] text-white text-[10px] font-extrabold uppercase tracking-wider shadow-md">
                     <Sparkles className="w-3 h-3" />
-                    {activePopup.badge}
+                    {activePopup.badge || "WEEKEND SPECIAL"}
                   </span>
+                </div>
+                <div className="absolute top-3 right-3 w-7 h-7 rounded-full bg-black/60 text-white flex items-center justify-center border border-white/20 backdrop-blur-md">
+                  <X className="w-3.5 h-3.5" />
                 </div>
               </div>
             )}
 
-            <div className="p-5">
+            <div className="p-4 sm:p-5">
               {!activePopup.imageUrl && (
-                <span className="badge-tag bg-[#c88242] text-white text-[10px] mb-2 flex items-center gap-1 w-max">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#c87935] text-white text-[10px] font-bold uppercase tracking-wider mb-2">
                   <Sparkles className="w-3 h-3" />
-                  {activePopup.badge}
+                  {activePopup.badge || "ANNOUNCEMENT"}
                 </span>
               )}
-              <h3 className="font-display text-base font-bold text-white mb-1.5 leading-snug">
+              <h3 className="font-display text-lg font-bold text-white mb-1.5 leading-snug">
                 {activePopup.title}
               </h3>
               {activePopup.subtitle && (
-                <p className="text-xs text-white/70 font-light leading-relaxed mb-4">
+                <p className="text-xs text-white/80 font-normal leading-relaxed mb-4">
                   {activePopup.subtitle}
                 </p>
               )}
 
-              <div className="flex items-center gap-2">
-                <div className="btn-caramel flex-1 py-2.5 text-xs font-bold flex items-center justify-center gap-1.5 pointer-events-none opacity-90">
-                  <span>{activePopup.ctaText}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+              <div className="flex items-center gap-2.5">
+                <div className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-[#c87935] to-[#b36526] text-white text-xs font-bold shadow-md shadow-[#c87935]/25 pointer-events-none">
+                  <span>{activePopup.ctaText || "Explore Full Menu"}</span>
+                  <ArrowRight className="w-3 h-3" />
                 </div>
+                <span className="text-xs text-white/60">Maybe Later</span>
+              </div>
+
+              <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-[10px] text-white/50">
+                <span className="flex items-center gap-1.5">
+                  <input type="checkbox" readOnly checked className="accent-[#c87935] w-3 h-3 rounded" />
+                  Don't show again today
+                </span>
+                <span className="text-[10px] font-bold text-[#c87935] tracking-widest uppercase">
+                  EVERBLOOM CAFÉ
+                </span>
               </div>
             </div>
           </div>

@@ -20,8 +20,8 @@ export default function AdminMenu() {
   const [adminUser, setAdminUser] = useState(getAdminUser());
 
   // Login form state
-  const [loginEmail, setLoginEmail] = useState("admin@everbloom.com");
-  const [loginPassword, setLoginPassword] = useState("EverBloomAdmin2026!");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
   const [loginLoading, setLoginLoading] = useState(false);
   const [loginError, setLoginError] = useState("");
 
@@ -302,6 +302,7 @@ export default function AdminMenu() {
               </label>
               <input
                 type="email"
+                placeholder="admin@everbloom.com"
                 value={loginEmail}
                 onChange={(e) => setLoginEmail(e.target.value)}
                 className="w-full px-4 py-3 rounded-2xl bg-[#faf7f2] border border-[#e8ded3] text-xs text-[#2b1810] font-medium focus:outline-none focus:border-[#c88242] transition-colors"
@@ -315,6 +316,7 @@ export default function AdminMenu() {
               </label>
               <input
                 type="password"
+                placeholder="••••••••••••"
                 value={loginPassword}
                 onChange={(e) => setLoginPassword(e.target.value)}
                 className="w-full px-4 py-3 rounded-2xl bg-[#faf7f2] border border-[#e8ded3] text-xs text-[#2b1810] font-medium focus:outline-none focus:border-[#c88242] transition-colors"
@@ -332,11 +334,18 @@ export default function AdminMenu() {
           </form>
 
           {/* Quick Demo Credentials Autofill */}
-          <div className="mt-5 p-3 rounded-2xl bg-[#faf7f2] border border-[#e8ded3] text-center">
+          <button
+            type="button"
+            onClick={() => {
+              setLoginEmail("admin@everbloom.com");
+              setLoginPassword("EverBloomAdmin2026!");
+            }}
+            className="w-full mt-5 p-3 rounded-2xl bg-[#faf7f2] hover:bg-[#f3ebe1] border border-[#e8ded3] text-center transition-colors cursor-pointer group"
+          >
             <p className="text-[11px] text-[#6b5c54]">
-              Demo: <span className="font-mono text-[#2b1810] font-bold">admin@everbloom.com</span> / <span className="font-mono text-[#2b1810] font-bold">EverBloomAdmin2026!</span>
+              Click to autofill Demo: <span className="font-mono text-[#2b1810] font-bold group-hover:text-[#c88242]">admin@everbloom.com</span>
             </p>
-          </div>
+          </button>
 
           <div className="mt-6 pt-5 border-t border-[#e8ded3] text-center">
             <Link

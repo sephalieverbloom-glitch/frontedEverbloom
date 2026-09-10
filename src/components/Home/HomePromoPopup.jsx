@@ -1,35 +1,50 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
-import { X, Sparkles, ArrowRight, BellRing } from "lucide-react";
+import { X, Sparkles, ArrowRight } from "lucide-react";
 import { popupApi } from "../../lib/api";
 
+const DEFAULT_PROMO = {
+  active: true,
+  badge: "WEEKEND SPECIAL",
+  title: "Weekend Artisanal Brew Tasting",
+  subtitle: "Get 20% off on all signature hand-poured coffees & fresh berry coolers this Saturday & Sunday.",
+  imageUrl: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?q=80&w=800&auto=format&fit=crop",
+  ctaText: "Explore Full Menu",
+  ctaLink: "/menu"
+};
+
 export default function HomePromoPopup() {
-  const [popup, setPopup] = useState(null);
+  const [popup, setPopup] = useState(DEFAULT_PROMO);
   const [isOpen, setIsOpen] = useState(false);
   const [dontShowToday, setDontShowToday] = useState(false);
 
   useEffect(() => {
-    // Check if dismissed today
+    // Check if user dismissed the popup today
     const dismissedDate = localStorage.getItem("everbloom_popup_dismissed_date");
     const today = new Date().toDateString();
 
     if (dismissedDate === today) {
-      return; // already dismissed today
+      return;
     }
 
     const fetchPopup = async () => {
       try {
         const res = await popupApi.getActive();
         if (res && res.success && res.data && res.data.active) {
-          setPopup(res.data);
-          // Small delay for smooth entry after home page loads
-          const timer = setTimeout(() => {
-            setIsOpen(true);
-          }, 800);
-          return () => clearTimeout(timer);
+          setPopup({
+            ...res.data,
+            badge: res.data.badge || "WEEKEND SPECIAL",
+            ctaText: res.data.ctaText || "Explore Full Menu",
+            ctaLink: res.data.ctaLink || "/menu"
+          });
         }
       } catch (err) {
-        console.log("Could not load promo popup:", err);
+        console.log("Using default promo showcase:", err);
+      } finally {
+        const timer = setTimeout(() => {
+          setIsOpen(true);
+        }, 900);
+        return () => clearTimeout(timer);
       }
     };
 
@@ -46,98 +61,97 @@ export default function HomePromoPopup() {
   if (!isOpen || !popup) return null;
 
   return (
-    <div 
-      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5 md:p-6 bg-black/80 backdrop-blur-md animate-fade-in overflow-y-auto"
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm animate-fade-in"
       onClick={handleClose}
     >
-      <div 
-        className="relative w-full max-w-[92vw] sm:max-w-md md:max-w-lg max-h-[88vh] bg-[#1a0e09] text-white rounded-3xl overflow-hidden border border-[#c88242]/30 shadow-2xl flex flex-col animate-fade-in-up my-auto"
+      <div
+        className="relative w-full max-w-[320px] sm:max-w-[360px] md:max-w-[380px] bg-[#1a0e08] text-white rounded-[22px] sm:rounded-[26px] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.85)] flex flex-col animate-fade-in-up my-auto transition-all max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button - Easy to tap */}
-        <button
-          onClick={handleClose}
-          className="absolute top-3 right-3 z-30 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center backdrop-blur-md transition-all border border-white/20 shadow-lg"
-          aria-label="Close Announcement"
-        >
-          <X className="w-4 h-4 sm:w-5 sm:h-5" />
-        </button>
+        {/* Top Image Section */}
+        <div className="relative h-36 sm:h-40 md:h-44 w-full overflow-hidden bg-[#120a06] shrink-0">
+          <img
+            src={popup.imageUrl || DEFAULT_PROMO.imageUrl}
+            alt={popup.title}
+            className="w-full h-full object-cover object-center filter brightness-95"
+          />
 
-        {/* Promo Image Header */}
-        {popup.imageUrl && (
-          <div className="relative h-36 sm:h-44 md:h-52 w-full overflow-hidden bg-black/50 shrink-0">
-            <img
-              src={popup.imageUrl}
-              alt={popup.title}
-              className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1a0e09] via-transparent to-black/30" />
-            
-            {/* Promo Tag */}
-            <div className="absolute top-3 left-3 sm:top-4 sm:left-4">
-              <span className="badge-tag bg-[#c88242] text-white shadow-lg flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs">
-                <Sparkles className="w-3 h-3 animate-pulse" />
-                {popup.badge || "Special Offer"}
-              </span>
-            </div>
+          {/* Seamless bottom fade into card body */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1a0e08] via-[#1a0e08]/60 to-black/25 pointer-events-none" />
+
+          {/* Top Left Badge */}
+          <div className="absolute top-3 left-3 sm:top-3.5 sm:left-3.5 z-20">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#c87935] text-white text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider shadow-md backdrop-blur-md">
+              <Sparkles className="w-3 h-3 text-white animate-pulse" />
+              <span>{popup.badge || "WEEKEND SPECIAL"}</span>
+            </span>
           </div>
-        )}
 
-        {/* Content Body - Scrollable if content is long on small phones */}
-        <div className="p-4 sm:p-6 md:p-8 overflow-y-auto flex-1 flex flex-col justify-between">
+          {/* Top Right Close Button */}
+          <button
+            onClick={handleClose}
+            className="absolute top-3 right-3 sm:top-3.5 sm:right-3.5 z-20 w-8 h-8 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center border border-white/20 backdrop-blur-md shadow-lg transition-all active:scale-95"
+            aria-label="Close Announcement"
+          >
+            <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+          </button>
+        </div>
+
+        {/* Content Body */}
+        <div className="px-4 sm:px-5 pb-4 sm:pb-5 pt-0.5 flex flex-col justify-between">
           <div>
-            {!popup.imageUrl && (
-              <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                <span className="badge-tag bg-[#c88242] text-white shadow-md flex items-center gap-1.5 text-xs">
-                  <BellRing className="w-3.5 h-3.5" />
-                  {popup.badge || "Announcement"}
-                </span>
-              </div>
-            )}
-
-            <h3 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-[#faf7f2] mb-1.5 sm:mb-2 leading-snug">
+            {/* Headline Title */}
+            <h3 className="font-display text-lg sm:text-xl md:text-[22px] font-bold text-white tracking-tight leading-snug mb-1.5">
               {popup.title}
             </h3>
 
-            {popup.subtitle && (
-              <p className="text-xs sm:text-sm text-white/75 font-light leading-relaxed mb-4 sm:mb-6">
-                {popup.subtitle}
-              </p>
-            )}
+            {/* Description / Subtitle */}
+            <p className="text-xs sm:text-[13px] text-white/80 font-normal leading-relaxed mb-4">
+              {popup.subtitle}
+            </p>
           </div>
 
-          {/* Action Buttons & Footer */}
+          {/* Action Buttons Row */}
           <div>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 pt-1">
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              {/* Primary Caramel Button */}
               <Link
                 to={popup.ctaLink || "/menu"}
                 onClick={handleClose}
-                className="btn-caramel py-2.5 sm:py-3 px-5 text-xs sm:text-sm font-bold tracking-wide flex items-center justify-center gap-2 shadow-xl shadow-[#c88242]/20 text-center"
+                className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 py-2.5 rounded-full bg-gradient-to-r from-[#c87935] to-[#b36526] hover:from-[#d9853e] hover:to-[#be6f2d] text-white font-bold text-xs sm:text-[13px] shadow-lg shadow-[#c87935]/25 transition-all hover:scale-[1.02] active:scale-95 text-center"
               >
-                <span>{popup.ctaText || "Explore Details"}</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>{popup.ctaText || "Explore Full Menu"}</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
 
+              {/* Ghost Secondary Button */}
               <button
+                type="button"
                 onClick={handleClose}
-                className="w-full sm:w-auto px-4 py-2 sm:py-2.5 rounded-full text-xs font-semibold text-white/70 hover:text-white hover:bg-white/5 transition-colors text-center"
+                className="px-3 py-2 rounded-full text-xs font-semibold text-white/70 hover:text-white transition-colors cursor-pointer shrink-0"
               >
                 Maybe Later
               </button>
             </div>
 
-            {/* Don't show today checkbox */}
-            <div className="mt-3 sm:mt-5 pt-3 sm:pt-4 border-t border-white/10 flex items-center justify-between text-[10px] sm:text-[11px] text-white/50 gap-2">
-              <label className="flex items-center gap-2 cursor-pointer select-none hover:text-white/80 transition-colors">
+            {/* Bottom Footer Bar */}
+            <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-[10px] sm:text-[11px] text-white/60 gap-2">
+              {/* Don't show today Checkbox */}
+              <label className="flex items-center gap-1.5 cursor-pointer select-none hover:text-white/90 transition-colors">
                 <input
                   type="checkbox"
                   checked={dontShowToday}
                   onChange={(e) => setDontShowToday(e.target.checked)}
-                  className="w-3.5 h-3.5 rounded accent-[#c88242] shrink-0"
+                  className="w-3.5 h-3.5 rounded bg-white/10 border-white/20 text-[#c87935] focus:ring-[#c87935] accent-[#c87935] cursor-pointer shrink-0"
                 />
-                <span className="line-clamp-1">Don't show again today</span>
+                <span className="text-[10px] sm:text-[11px] text-white/70">Don't show again today</span>
               </label>
-              <span className="text-[9px] sm:text-[10px] text-[#c88242] font-semibold uppercase tracking-wider shrink-0">Everbloom Café</span>
+
+              {/* Cafe Branding */}
+              <span className="text-[10px] font-bold text-[#c87935] tracking-widest uppercase shrink-0">
+                EVERBLOOM CAFÉ
+              </span>
             </div>
           </div>
         </div>

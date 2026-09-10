@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router";
-import { Menu, X, ChevronRight, Sparkles, Phone, MapPin, Clock } from "lucide-react";
+import { Menu, X, ChevronRight } from "lucide-react";
+import ArrowFillButton from "./ui/arrow-fill-button";
 
 const navLinks = [
   { label: "HOME", path: "/" },
@@ -82,12 +83,17 @@ export default function Navbar() {
 
           {/* Right: Book Table Button & Hamburger */}
           <div className="flex items-center gap-2 sm:gap-3">
-            <Link
-              to="/booking"
-              className="hidden sm:inline-flex items-center justify-center px-4 sm:px-5 py-2 rounded-full bg-[#1c1109] hover:bg-[#2e1c10] active:scale-95 text-white font-display text-[13px] font-extrabold tracking-[0.14em] uppercase transition-all duration-200 shadow-md whitespace-nowrap"
-            >
-              BOOK TABLE
-            </Link>
+            <div className="hidden sm:inline-flex">
+              <ArrowFillButton
+                btnText="BOOK TABLE"
+                href="/booking"
+                bgColor="#1c1109"
+                textColor="#ffffff"
+                fillBgColor="#c88242"
+                fillTextColor="#ffffff"
+                className="!text-[12px] sm:!text-[13px] tracking-[0.14em] uppercase font-display font-extrabold !shadow-sm"
+              />
+            </div>
 
             {/* Mobile & Tablet Hamburger Button */}
             <button
@@ -153,13 +159,17 @@ export default function Navbar() {
 
             {/* Bottom Actions */}
             <div className="pt-4 border-t border-[#f0e6dc] flex flex-col gap-3 mt-4">
-              <Link
-                to="/booking"
-                onClick={() => setMobileOpen(false)}
-                className="w-full py-3.5 rounded-full bg-[#d49748] hover:bg-[#e0a455] text-[#1c1109] font-display font-extrabold text-[13px] tracking-[0.14em] uppercase text-center shadow-md"
-              >
-                BOOK A TABLE
-              </Link>
+              <div onClick={() => setMobileOpen(false)} className="w-full flex justify-center">
+                <ArrowFillButton
+                  btnText="BOOK A TABLE"
+                  href="/booking"
+                  bgColor="#c88242"
+                  textColor="#ffffff"
+                  fillBgColor="#2b1810"
+                  fillTextColor="#ffffff"
+                  className="!w-full !h-12 !text-[13px] tracking-[0.14em] uppercase font-display font-extrabold"
+                />
+              </div>
               <div className="flex items-center justify-between text-xs text-[#6b5c54] px-1">
                 <span>1:00 PM – 11:00 PM</span>
                 <a href="tel:09437164578" className="font-bold text-[#1c1109] hover:underline">

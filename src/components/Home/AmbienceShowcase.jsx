@@ -39,7 +39,7 @@ export default function AmbienceShowcase() {
 
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
-  return <section className="section-padding py-20 lg:py-28 bg-[#180e0a] text-white relative overflow-hidden">
+  return <section className="section-padding py-20 lg:py-28 bg-[#2a1e1a] text-white relative overflow-hidden">
       {/* Dynamic Tab-Reactive Ambient Color Halos */}
       <div
         className={`absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none transition-all duration-700 ${

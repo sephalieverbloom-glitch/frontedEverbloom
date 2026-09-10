@@ -8,6 +8,23 @@
   :root {
     --background: 40 30% 98%;
     --foreground: 24 35% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 24 35% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 24 35% 15%;
+    --primary: 28 55% 52%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 25% 92%;
+    --secondary-foreground: 24 35% 15%;
+    --muted: 40 20% 90%;
+    --muted-foreground: 25 12% 40%;
+    --accent: 40 25% 92%;
+    --accent-foreground: 24 35% 15%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 35 20% 86%;
+    --input: 35 20% 86%;
+    --ring: 28 55% 52%;
     
     /* Authentic Artisanal Espresso & Leaf Palette */
     --color-espresso: #2b1810;
