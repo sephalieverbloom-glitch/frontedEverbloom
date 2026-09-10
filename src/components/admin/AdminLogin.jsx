@@ -140,16 +140,11 @@ export default function AdminLogin({ onLoginSuccess }) {
           </button>
         </form>
 
-        {/* Demo Credentials Quick Fill Button */}
+        {/* Footer Security Badge */}
         <div className="mt-6 pt-5 border-t border-[#e8ded3] text-center">
-          <button
-            type="button"
-            onClick={handleFillDemo}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#faf7f2] hover:bg-[#f0e8dc] border border-[#e8ded3] text-[11px] text-[#6b5c54] hover:text-[#2b1810] transition-all font-semibold"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-[#c88242]" />
-            <span>Click to auto-fill (admin / admin123)</span>
-          </button>
+          <p className="text-[11px] text-[#6b5c54]">
+            Everbloom Café Management System • Secure Admin Portal
+          </p>
         </div>
       </div>
     </div>
