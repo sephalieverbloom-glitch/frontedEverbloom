@@ -102,7 +102,8 @@ export default function PhotosSection({ photos = [], onRefresh }) {
 
       let res;
       if (editingPhoto) {
-        res = await photosApi.update(editingPhoto.id, formData);
+        const photoId = editingPhoto._id || editingPhoto.id;
+        res = await photosApi.update(photoId, formData);
       } else {
         res = await photosApi.create(formData);
       }
@@ -205,71 +206,78 @@ export default function PhotosSection({ photos = [], onRefresh }) {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          {filteredPhotos.map((photo) => (
-            <div
-              key={photo.id}
-              className="group bg-white border border-[#e8ded3] hover:border-[#2b1810] rounded-3xl overflow-hidden transition-all duration-200 shadow-sm hover:shadow-md flex flex-col justify-between"
-            >
-              {/* Image Preview Container */}
-              <div className="relative h-48 sm:h-52 bg-[#f4ece2] overflow-hidden">
-                <img
-                  src={photo.src}
-                  alt={photo.alt}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+          {filteredPhotos.map((photo) => {
+            const pId = photo._id || photo.id;
+            return (
+              <div
+                key={pId}
+                className="group bg-white border border-[#e8ded3] hover:border-[#2b1810] rounded-3xl overflow-hidden transition-all duration-200 shadow-sm hover:shadow-md flex flex-col justify-between"
+              >
+                {/* Image Preview Container */}
+                <div className="relative h-48 sm:h-52 bg-[#f4ece2] overflow-hidden">
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    onError={(e) => {
+                      e.currentTarget.src =
+                        "https://res.cloudinary.com/p2gsrga3/image/upload/v1789146209/myheroimg.png";
+                    }}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
 
-                {/* Category Badge */}
-                <div className="absolute top-3 left-3">
-                  <span className="px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-[10px] font-bold uppercase text-[#2b1810] border border-[#e8ded3] shadow-sm">
-                    {photo.category}
-                  </span>
+                  {/* Category Badge */}
+                  <div className="absolute top-3 left-3">
+                    <span className="px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-[10px] font-bold uppercase text-[#2b1810] border border-[#e8ded3] shadow-sm">
+                      {photo.category}
+                    </span>
+                  </div>
+
+                  {/* Floating Action Buttons */}
+                  <div className="absolute top-3 right-3 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    <button
+                      onClick={() => handleOpenEdit(photo)}
+                      className="w-8 h-8 rounded-full bg-white text-[#2b1810] hover:bg-[#faf7f2] shadow-md flex items-center justify-center transition-colors border border-[#e8ded3]"
+                      title="Edit Photo"
+                    >
+                      <Edit3 className="w-3.5 h-3.5" />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(pId)}
+                      disabled={deletingId === pId}
+                      className="w-8 h-8 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-700 shadow-md flex items-center justify-center transition-colors border border-rose-200 disabled:opacity-50"
+                      title="Delete Photo"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
 
-                {/* Floating Action Buttons */}
-                <div className="absolute top-3 right-3 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                  <button
-                    onClick={() => handleOpenEdit(photo)}
-                    className="w-8 h-8 rounded-full bg-white text-[#2b1810] hover:bg-[#faf7f2] shadow-md flex items-center justify-center transition-colors border border-[#e8ded3]"
-                    title="Edit Photo"
-                  >
-                    <Edit3 className="w-3.5 h-3.5" />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(photo.id)}
-                    disabled={deletingId === photo.id}
-                    className="w-8 h-8 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-700 shadow-md flex items-center justify-center transition-colors border border-rose-200 disabled:opacity-50"
-                    title="Delete Photo"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                  </button>
+                {/* Photo Details */}
+                <div className="p-4 flex flex-col justify-between flex-1">
+                  <div>
+                    <h3 className="font-display text-sm font-bold text-[#2b1810] line-clamp-1 mb-1">
+                      {photo.alt}
+                    </h3>
+                    {photo.desc && (
+                      <p className="text-[11px] text-[#6b5c54] line-clamp-2 leading-relaxed">
+                        {photo.desc}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="mt-3 pt-3 border-t border-[#f0e8dc] flex items-center justify-between text-[10px] text-[#6b5c54]">
+                    <span>ID: {pId}</span>
+                    <button
+                      onClick={() => handleOpenEdit(photo)}
+                      className="text-[#2b1810] hover:underline font-bold transition-colors"
+                    >
+                      Edit Info →
+                    </button>
+                  </div>
                 </div>
               </div>
-
-              {/* Photo Details */}
-              <div className="p-4 flex flex-col justify-between flex-1">
-                <div>
-                  <h3 className="font-display text-sm font-bold text-[#2b1810] line-clamp-1 mb-1">
-                    {photo.alt}
-                  </h3>
-                  {photo.desc && (
-                    <p className="text-[11px] text-[#6b5c54] line-clamp-2 leading-relaxed">
-                      {photo.desc}
-                    </p>
-                  )}
-                </div>
-
-                <div className="mt-3 pt-3 border-t border-[#f0e8dc] flex items-center justify-between text-[10px] text-[#6b5c54]">
-                  <span>ID: {photo.id}</span>
-                  <button
-                    onClick={() => handleOpenEdit(photo)}
-                    className="text-[#2b1810] hover:underline font-bold transition-colors"
-                  >
-                    Edit Info →
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 

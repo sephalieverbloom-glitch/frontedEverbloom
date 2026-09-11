@@ -2,7 +2,7 @@ export default function AboutHero() {
   return (
     <section className="relative min-h-[46vh] sm:min-h-[50vh] overflow-hidden bg-[#1a0f0b] flex items-center justify-center pt-32 sm:pt-36 pb-16 sm:pb-20">
       <img
-        src="/MYHERO/myheroimg.png"
+        src="https://res.cloudinary.com/p2gsrga3/image/upload/v1789146209/myheroimg.png"
         alt="Everbloom Café Floral Mural"
         className="absolute inset-0 w-full h-full object-cover object-[center_35%] filter brightness-[0.80] contrast-[1.05]"
       />

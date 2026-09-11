@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { Sparkles, BookOpen } from "lucide-react";
+import api from "../../lib/api";
 
 const curatedSections = [
   {
@@ -146,11 +147,31 @@ const curatedSections = [
 ];
 
 export default function MenuList() {
+  const [sections, setSections] = useState(curatedSections);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchMenu = async () => {
+      try {
+        const res = await api.getGroupedMenu();
+        if (res && res.data && Array.isArray(res.data) && res.data.length > 0) {
+          setSections(res.data);
+        }
+      } catch (err) {
+        console.warn("Could not load dynamic menu, using fallback:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMenu();
+  }, []);
+
   return (
     <div className="section-padding py-16 sm:py-24 bg-white text-[#1c1109]">
       <div className="max-w-7xl mx-auto space-y-20 sm:space-y-28">
-        {curatedSections.map((sec) => (
-          <section key={sec.number}>
+        {sections.map((sec, secIdx) => (
+          <section key={sec.number || secIdx}>
             {/* Section Header with Number Watermark */}
             <div className="flex items-end justify-between border-b border-[#e8ded3] pb-4 mb-10 sm:mb-12">
               <div>

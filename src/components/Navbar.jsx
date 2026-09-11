@@ -51,7 +51,7 @@ export default function Navbar() {
             className="flex items-center shrink-0 group h-9 overflow-visible"
           >
             <img
-              src="/everbloom/MYLOGO.png"
+              src="https://res.cloudinary.com/p2gsrga3/image/upload/v1789146458/MYLOGO.png"
               alt="Everbloom"
               className="h-9 sm:h-10 w-auto object-contain scale-[3] origin-left transition-transform"
             />
@@ -116,7 +116,7 @@ export default function Navbar() {
               <div className="flex items-center justify-between pb-4 border-b border-[#f0e6dc] mb-4">
                 <div className="flex items-center gap-2.5">
                   <img
-                    src="/everbloom/logo.png"
+                    src="https://res.cloudinary.com/p2gsrga3/image/upload/v1789147635/logo.png"
                     alt="Everbloom"
                     className="h-9 w-auto object-contain"
                   />

@@ -5,7 +5,7 @@ export default function ContactHero() {
     <section className="relative min-h-[46vh] sm:min-h-[50vh] overflow-hidden bg-[#180e0a] flex items-center justify-center pt-32 sm:pt-36 pb-16 sm:pb-20 text-white">
       {/* Background Hero Image */}
       <img
-        src="/everbloom/cafe-indoor-dining.jpg"
+        src="https://res.cloudinary.com/p2gsrga3/image/upload/v1789147048/interior-cozy.jpg"
         alt="Everbloom Café Hospitality"
         className="absolute inset-0 w-full h-full object-cover object-[center_40%] filter brightness-[0.80] contrast-[1.08] transition-transform duration-1000 ease-out"
       />

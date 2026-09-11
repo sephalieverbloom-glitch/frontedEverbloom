@@ -26,7 +26,7 @@ export default function Footer() {
               <div className="flex items-center gap-3 mb-4">
                 <div className="bg-white/95 p-2 rounded-full shadow-lg shrink-0 flex items-center justify-center">
                   <img
-                    src="/everbloom/logo.png"
+                    src="https://res.cloudinary.com/p2gsrga3/image/upload/v1789147635/logo.png"
                     alt="Everbloom Café"
                     className="h-10 w-auto object-contain drop-shadow-sm"
                   />

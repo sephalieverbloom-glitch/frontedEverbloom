@@ -7,7 +7,7 @@ export default function HeroSection() {
       {/* Real Cafe Hero Image (Replaced dark video with vibrant cafe interior) */}
       <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
         <img
-          src="/MYHERO/myheroimg.png"
+          src="https://res.cloudinary.com/p2gsrga3/image/upload/v1789146209/myheroimg.png"
           alt="Everbloom Cafe Floral Mural Ambience"
           className="w-full h-full object-cover object-[center_35%] scale-100 filter brightness-[0.88] contrast-[1.08] transition-transform duration-1000 ease-out"
         />

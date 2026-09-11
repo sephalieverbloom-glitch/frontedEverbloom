@@ -12,7 +12,7 @@ const customMilestones = [
     bgGradient: 'from-[#4a2b1f] via-[#6b4c33] to-[#2c1a0f]',
     borderColor: '#c88242',
     rotation: 'rotate-0',
-    image: '/everbloom/birthday-celebration-arch.jpg',
+    image: 'https://res.cloudinary.com/p2gsrga3/image/upload/v1789146653/img3.png',
     icon: null,
   },
   {
@@ -24,7 +24,7 @@ const customMilestones = [
     bgGradient: 'from-[#3b4222] via-[#55673a] to-[#1c260e]',
     borderColor: '#e29b5a',
     rotation: '-rotate-1',
-    image: '/everbloom/birthday-outdoor-setup.jpg',
+    image: 'https://res.cloudinary.com/p2gsrga3/image/upload/v1789149129/ed448c81-64a8-4b27-ad99-13e7dfafa61a.jpg',
     icon: null,
   },
   {
@@ -36,7 +36,7 @@ const customMilestones = [
     bgGradient: 'from-[#2c180b] via-[#3e2918] to-[#1a0c05]',
     borderColor: '#c88242',
     rotation: 'rotate-0',
-    image: '/everbloom/cafe-indoor-dining.jpg',
+    image: 'https://res.cloudinary.com/p2gsrga3/image/upload/v1789146626/img2.png',
     icon: null,
   },
 ];

@@ -3,12 +3,12 @@ import { ArrowRight } from "lucide-react";
 
 export default function AboutGlimpses() {
   const glimpses = [
-    { src: "/everbloom/interior-mural.png", alt: "Floral Rose Wall Mural", span: "md:col-span-2 md:row-span-2" },
-    { src: "/everbloom/interior-wall-neon.png", alt: "Warm Ambient AC Lounge", span: "" },
-    { src: "/everbloom/signature-coolers.jpg", alt: "Artisanal Berry Coolers", span: "" },
-    { src: "/everbloom/outdoor-patio.jpg", alt: "Nature-Inspired Outdoor Patio", span: "md:col-span-2" },
-    { src: "/pasta.jpg", alt: "Handcrafted Pasta", span: "" },
-    { src: "/cheesecake.jpg", alt: "Blueberry Cheesecake", span: "" },
+    { src: "https://res.cloudinary.com/p2gsrga3/image/upload/v1789146209/myheroimg.png", alt: "Floral Rose Wall Mural", span: "md:col-span-2 md:row-span-2" },
+    { src: "https://res.cloudinary.com/p2gsrga3/image/upload/v1789146626/img2.png", alt: "Warm Ambient AC Lounge", span: "" },
+    { src: "https://res.cloudinary.com/p2gsrga3/image/upload/v1789149127/5711f2ca-09f2-49f2-9961-2b6b5d71e8b4.jpg", alt: "Artisanal Berry Coolers", span: "" },
+    { src: "https://res.cloudinary.com/p2gsrga3/image/upload/v1789149129/ed448c81-64a8-4b27-ad99-13e7dfafa61a.jpg", alt: "Nature-Inspired Outdoor Patio", span: "md:col-span-2" },
+    { src: "https://res.cloudinary.com/p2gsrga3/image/upload/v1789149128/d3bb1a94-7486-4d37-8365-625e7484a6b2.jpg", alt: "Handcrafted Pasta", span: "" },
+    { src: "https://res.cloudinary.com/p2gsrga3/image/upload/v1789146653/img3.png", alt: "Blueberry Cheesecake", span: "" },
   ];
 
   return (

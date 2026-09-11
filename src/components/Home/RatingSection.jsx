@@ -78,7 +78,7 @@ export default function RatingSection() {
             </div>
 
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#1c1109] leading-tight mb-4">
-              Loved by Over <span className="italic font-normal text-[#c88242]">12,000+</span> Coffee Enthusiasts
+              Loved by Over <span className="italic font-normal text-[#c88242]">100+</span> Coffee Enthusiasts
             </h2>
 
             <p className="text-sm sm:text-base text-[#6b5c54] font-light leading-relaxed max-w-2xl mx-auto">

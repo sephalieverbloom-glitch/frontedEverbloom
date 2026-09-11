@@ -20,7 +20,7 @@ export default function LinkHub() {
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-10">
             <div className="w-20 h-20 rounded-3xl bg-[#2b1810] flex items-center justify-center text-white mx-auto mb-4 p-3 shadow-lg">
-              <img src="/everbloom/logo.png" alt="Everbloom" className="w-full h-full object-contain" />
+              <img src="https://res.cloudinary.com/p2gsrga3/image/upload/v1789147635/logo.png" alt="Everbloom" className="w-full h-full object-contain" />
             </div>
             <h1 className="font-display text-3xl font-extrabold text-[#2b1810] mb-2">Everbloom Café</h1>
             <p className="text-xs sm:text-sm text-[#6b5c54]">Where Good Food &amp; Good Mood Bloom · Bhubaneswar</p>

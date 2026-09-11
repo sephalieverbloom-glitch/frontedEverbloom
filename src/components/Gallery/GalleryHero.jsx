@@ -5,7 +5,7 @@ export default function GalleryHero() {
     <section className="relative min-h-[46vh] sm:min-h-[50vh] overflow-hidden bg-[#180e0a] flex items-center justify-center pt-32 sm:pt-36 pb-16 sm:pb-20 text-white">
       {/* Background Hero Image */}
       <img
-        src="/MYHERO/myheroimg.png"
+        src="https://res.cloudinary.com/p2gsrga3/image/upload/v1789146605/myimg.png"
         alt="Everbloom Café Visual Moments"
         className="absolute inset-0 w-full h-full object-cover object-[center_35%] filter brightness-[0.80] contrast-[1.08] transition-transform duration-1000 ease-out"
       />
