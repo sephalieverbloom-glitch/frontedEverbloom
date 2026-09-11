@@ -25,7 +25,7 @@ import AdminInquiriesView from "../components/Admin/AdminInquiriesView";
 import PopupSection from "../components/Admin/sections/PopupSection";
 import PhotosSection from "../components/Admin/sections/PhotosSection";
 import { popupApi, photosApi } from "../lib/api";
-import ItemModala from "./components/Admin/ItemModal";
+import ItemModal from "../components/admin/ItemModal";
 export default function AdminMenu() {
   const [token, setToken] = useState(getAdminToken());
   const [adminUser, setAdminUser] = useState(getAdminUser());
@@ -592,7 +592,7 @@ export default function AdminMenu() {
       </div>
 
       {/* Reusable Dish Add / Edit Modal */}
-      <ItemModala
+      <ItemModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={handleSaveModal}
