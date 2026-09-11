@@ -5,7 +5,7 @@ export default function ReviewsSection() {
   const moments = [
     { src: "/everbloom/espresso-crema-macro.jpg", alt: "Artisanal Crema Espresso Extraction", span: "" },
     { src: "/everbloom/barista-latte-art.jpg", alt: "Velvety Rosetta Latte Art by Barista", span: "" },
-    { src: "/everbloom/twilight-botanical-patio.jpg", alt: "Botanical Garden Patio at Twilight", span: "" },
+    { src: "https://res.cloudinary.com/p2gsrga3/image/upload/v1789149128/d3bb1a94-7486-4d37-8365-625e7484a6b2.jpg", alt: "Botanical Garden Patio at Twilight", span: "" },
     { src: "/everbloom/signature-coolers.jpg", alt: "Signature Berry Blossom Coolers", span: "" },
   ];
 
