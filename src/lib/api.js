@@ -3,7 +3,7 @@
  * Connects frontend components to the backend REST API
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/api/v1";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "https://backendeverblo.vercel.app/api/v1";
 
 export const getAdminToken = () => {
   return localStorage.getItem("everbloom_admin_token") || null;

@@ -14,18 +14,19 @@ import {
   Coffee,
   ArrowRight,
 } from "lucide-react";
-import api, { getAdminToken, getAdminUser, setAdminToken, setAdminUser } from "../lib/api";
+import api, { getAdminToken, getAdminUser, setAdminToken as saveAdminToken, setAdminUser as saveAdminUser } from "../lib/api";
 
-import AdminSidebar from "../components/Admin/AdminSidebar";
-import AdminTopNavbar from "../components/Admin/AdminTopNavbar";
-import AdminOverview from "../components/Admin/AdminOverview";
-import AdminMenuList from "../components/Admin/AdminMenuList";
-import AdminReservationsView from "../components/Admin/AdminReservationsView";
-import AdminInquiriesView from "../components/Admin/AdminInquiriesView";
-import PopupSection from "../components/Admin/sections/PopupSection";
-import PhotosSection from "../components/Admin/sections/PhotosSection";
+import AdminSidebar from "../components/admin/AdminSidebar";
+import AdminTopNavbar from "../components/admin/AdminTopNavbar";
+import AdminOverview from "../components/admin/AdminOverview";
+import AdminMenuList from "../components/admin/AdminMenuList";
+import AdminReservationsView from "../components/admin/AdminReservationsView";
+import AdminInquiriesView from "../components/admin/AdminInquiriesView";
+import PopupSection from "../components/admin/sections/PopupSection";
+import PhotosSection from "../components/admin/sections/PhotosSection";
 import { popupApi, photosApi } from "../lib/api";
 import ItemModal from "../components/admin/ItemModal";
+
 export default function AdminMenu() {
   const [token, setToken] = useState(getAdminToken());
   const [adminUser, setAdminUser] = useState(getAdminUser());
@@ -143,7 +144,8 @@ export default function AdminMenu() {
           role: "admin",
         };
         const fallbackToken = "demo_token_" + Date.now();
-        setAdminToken(fallbackToken);
+        saveAdminToken(fallbackToken);
+        saveAdminUser(fallbackUser);
         setAdminUser(fallbackUser);
         setToken(fallbackToken);
         showToast("Welcome to Everbloom Café Management Portal!");

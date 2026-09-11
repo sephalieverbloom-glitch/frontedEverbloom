@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
-import AdminLogin from "../components/Admin/AdminLogin";
-import AdminLayout from "../components/Admin/AdminLayout";
-import DashboardSection from "../components/Admin/sections/DashboardSection";
-import PhotosSection from "../components/Admin/sections/PhotosSection";
-import ContactSection from "../components/Admin/sections/ContactSection";
-import PopupSection from "../components/Admin/sections/PopupSection";
-import MenuSection from "../components/Admin/sections/MenuSection";
+import AdminLogin from "../components/admin/AdminLogin";
+import AdminLayout from "../components/admin/AdminLayout";
+import DashboardSection from "../components/admin/sections/DashboardSection";
+import PhotosSection from "../components/admin/sections/PhotosSection";
+import ContactSection from "../components/admin/sections/ContactSection";
+import PopupSection from "../components/admin/sections/PopupSection";
+import MenuSection from "../components/admin/sections/MenuSection";
 import { authApi, statsApi, photosApi, contactApi, popupApi, menuApi } from "../lib/api";
 
 export default function Admin() {
