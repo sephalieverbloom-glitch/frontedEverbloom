@@ -138,7 +138,9 @@ export default function PopupSection({ popups = [], onRefresh }) {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (popOrId) => {
+    const id = typeof popOrId === "object" ? (popOrId._id || popOrId.id) : popOrId;
+    if (!id) return;
     if (!window.confirm("Are you sure you want to delete this promo popup?")) {
       return;
     }
@@ -269,86 +271,89 @@ export default function PopupSection({ popups = [], onRefresh }) {
           </h3>
         </div>
 
-        {popups.map((pop) => (
-          <div
-            key={pop.id}
-            className={`group bg-white border rounded-3xl p-5 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
-              pop.active
-                ? "border-emerald-500 bg-[#f8fdf9]"
-                : "border-[#e8ded3] hover:border-[#2b1810]"
-            }`}
-          >
-            {/* Image & Title */}
-            <div className="flex items-center gap-4">
-              {pop.imageUrl ? (
-                <img
-                  src={pop.imageUrl}
-                  alt={pop.title}
-                  className="w-16 h-16 rounded-2xl object-cover border border-[#e8ded3] shrink-0"
-                />
-              ) : (
-                <div className="w-16 h-16 rounded-2xl bg-[#faf7f2] text-[#2b1810] border border-[#e8ded3] flex items-center justify-center shrink-0">
-                  <Megaphone className="w-6 h-6" />
-                </div>
-              )}
+        {popups.map((pop) => {
+          const popId = pop._id || pop.id;
+          return (
+            <div
+              key={popId}
+              className={`group bg-white border rounded-3xl p-5 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
+                pop.active
+                  ? "border-emerald-500 bg-[#f8fdf9]"
+                  : "border-[#e8ded3] hover:border-[#2b1810]"
+              }`}
+            >
+              {/* Image & Title */}
+              <div className="flex items-center gap-4">
+                {pop.imageUrl ? (
+                  <img
+                    src={pop.imageUrl}
+                    alt={pop.title}
+                    className="w-16 h-16 rounded-2xl object-cover border border-[#e8ded3] shrink-0"
+                  />
+                ) : (
+                  <div className="w-16 h-16 rounded-2xl bg-[#faf7f2] text-[#2b1810] border border-[#e8ded3] flex items-center justify-center shrink-0">
+                    <Megaphone className="w-6 h-6" />
+                  </div>
+                )}
 
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <span
-                    className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
-                      pop.active
-                        ? "bg-emerald-100 text-emerald-800 border border-emerald-300"
-                        : "bg-[#faf7f2] text-[#6b5c54] border border-[#e8ded3]"
-                    }`}
-                  >
-                    {pop.active ? "LIVE ON HOME" : "INACTIVE"}
-                  </span>
-                  <span className="text-[10px] font-bold text-[#6b5c54]">
-                    Tag: {pop.badge}
-                  </span>
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span
+                      className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                        pop.active
+                          ? "bg-emerald-100 text-emerald-800 border border-emerald-300"
+                          : "bg-[#faf7f2] text-[#6b5c54] border border-[#e8ded3]"
+                      }`}
+                    >
+                      {pop.active ? "LIVE ON HOME" : "INACTIVE"}
+                    </span>
+                    <span className="text-[10px] font-bold text-[#6b5c54]">
+                      Tag: {pop.badge}
+                    </span>
+                  </div>
+                  <h4 className="font-display text-sm font-bold text-[#2b1810] line-clamp-1">
+                    {pop.title}
+                  </h4>
+                  <p className="text-xs text-[#6b5c54] line-clamp-1">
+                    {pop.subtitle || "No subtitle"} • Link: {pop.ctaLink}
+                  </p>
                 </div>
-                <h4 className="font-display text-sm font-bold text-[#2b1810] line-clamp-1">
-                  {pop.title}
-                </h4>
-                <p className="text-xs text-[#6b5c54] line-clamp-1">
-                  {pop.subtitle || "No subtitle"} • Link: {pop.ctaLink}
-                </p>
+              </div>
+
+              {/* Actions */}
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  onClick={() => handleToggleActive(popId)}
+                  disabled={togglingId === popId}
+                  className={`px-3.5 py-2 rounded-2xl text-xs font-bold flex items-center gap-1.5 transition-all ${
+                    pop.active
+                      ? "bg-emerald-600 text-white shadow-sm"
+                      : "bg-[#faf7f2] hover:bg-[#f0e8dc] text-[#2b1810] border border-[#e8ded3]"
+                  }`}
+                >
+                  <Power className="w-3.5 h-3.5" />
+                  {pop.active ? "Active" : "Set Active"}
+                </button>
+
+                <button
+                  onClick={() => handleOpenEdit(pop)}
+                  className="w-9 h-9 rounded-2xl bg-[#faf7f2] hover:bg-[#f0e8dc] text-[#2b1810] border border-[#e8ded3] flex items-center justify-center transition-colors"
+                  title="Edit Popup"
+                >
+                  <Edit3 className="w-4 h-4" />
+                </button>
+
+                <button
+                  onClick={() => handleDelete(popId)}
+                  className="w-9 h-9 rounded-2xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 flex items-center justify-center transition-colors"
+                  title="Delete Popup"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
               </div>
             </div>
-
-            {/* Actions */}
-            <div className="flex items-center gap-2 shrink-0">
-              <button
-                onClick={() => handleToggleActive(pop.id)}
-                disabled={togglingId === pop.id}
-                className={`px-3.5 py-2 rounded-2xl text-xs font-bold flex items-center gap-1.5 transition-all ${
-                  pop.active
-                    ? "bg-emerald-600 text-white shadow-sm"
-                    : "bg-[#faf7f2] hover:bg-[#f0e8dc] text-[#2b1810] border border-[#e8ded3]"
-                }`}
-              >
-                <Power className="w-3.5 h-3.5" />
-                {pop.active ? "Active" : "Set Active"}
-              </button>
-
-              <button
-                onClick={() => handleOpenEdit(pop)}
-                className="w-9 h-9 rounded-2xl bg-[#faf7f2] hover:bg-[#f0e8dc] text-[#2b1810] border border-[#e8ded3] flex items-center justify-center transition-colors"
-                title="Edit Popup"
-              >
-                <Edit3 className="w-4 h-4" />
-              </button>
-
-              <button
-                onClick={() => handleDelete(pop.id)}
-                className="w-9 h-9 rounded-2xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 flex items-center justify-center transition-colors"
-                title="Delete Popup"
-              >
-                <Trash2 className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Add / Edit Popup Modal - Clean White */}
