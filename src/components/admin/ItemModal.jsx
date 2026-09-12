@@ -1,19 +1,36 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { 
   X, 
   Sparkles, 
   Image as ImageIcon, 
   AlertCircle, 
   Check, 
-  Utensils 
+  Utensils,
+  Upload
 } from "lucide-react";
 
 export const PRESET_CATEGORIES = [
-  { name: "Starters & Wraps", sectionNumber: "01", eyebrow: "BEGIN YOUR JOURNEY" },
-  { name: "Pizzas & Burgers", sectionNumber: "02", eyebrow: "SIGNATURE CREATIONS" },
-  { name: "Pastas & Mains", sectionNumber: "03", eyebrow: "ITALIAN CLASSICS" },
-  { name: "Signature Coolers", sectionNumber: "04", eyebrow: "HOUSE REFRESHERS" },
-  { name: "Coffee & Desserts", sectionNumber: "05", eyebrow: "SWEET FINALE & BREWS" },
+  { name: "Light Bites", sectionNumber: "01", eyebrow: "Crisp snacks, loaded fries & finger foods" },
+  { name: "Egg Delights", sectionNumber: "02", eyebrow: "Fresh farm eggs cooked to perfection" },
+  { name: "Sandwiches", sectionNumber: "03", eyebrow: "Freshly toasted gourmet breads" },
+  { name: "Pasta Favourites", sectionNumber: "04", eyebrow: "Italian pastas tossed in rich velvety scratch-made sauces" },
+  { name: "Crafted Burgers", sectionNumber: "05", eyebrow: "Loaded with homemade patties & secret sauces" },
+  { name: "Wrapped & Ready", sectionNumber: "06", eyebrow: "Toasted rolls & wraps loaded with fresh fillings" },
+  { name: "Hand Made Pizzas", sectionNumber: "07", eyebrow: "Freshly baked artisan crusts topped with mozzarella" },
+  { name: "House Special Momos", sectionNumber: "08", eyebrow: "Steamed, crispy, schezwan & afghani dumplings" },
+  { name: "Soups & Bowls", sectionNumber: "09", eyebrow: "Aromatic, comforting & warm bowls" },
+  { name: "Starters & Wok Delights", sectionNumber: "10", eyebrow: "Indo-Chinese sizzlers, tossed platters & seafood" },
+  { name: "Maggi Remixes", sectionNumber: "11", eyebrow: "Desi noodles tossed with gourmet cafe twists" },
+  { name: "Rice & Noodle Bowls", sectionNumber: "12", eyebrow: "Wok-tossed aromatic rice & oriental noodles" },
+  { name: "Hot Coffee Blends", sectionNumber: "13", eyebrow: "Aromatic espresso brews extracted from single-origin beans" },
+  { name: "Cold Coffee Creations", sectionNumber: "14", eyebrow: "Chilled espresso frappes, blended with cream" },
+  { name: "Chai Pe Charcha", sectionNumber: "15", eyebrow: "Fresh brewed Indian cutting chais & herbal teas" },
+  { name: "Iced Teas", sectionNumber: "16", eyebrow: "Refreshing brewed teas infused with fruit nectars" },
+  { name: "Milkshakes", sectionNumber: "17", eyebrow: "Thick creamy shakes blended with rich dairy & toppings" },
+  { name: "Mocktails & Coolers", sectionNumber: "18", eyebrow: "Sparkling sodas, citrus blends & colorful party coolers" },
+  { name: "Slushies", sectionNumber: "19", eyebrow: "Icy crushed coolers for instant tropical freshness" },
+  { name: "Desserts & Brownies", sectionNumber: "20", eyebrow: "Decadent cakes, warm brownies & ice creams" },
+  { name: "Add-Ons & Extras", sectionNumber: "21", eyebrow: "Customize your meals & beverages" },
 ];
 
 const SUGGESTED_TAGS = ["Bestseller", "Chef's Special", "Most Loved", "Must Try", "New", "Signature Brew"];
@@ -35,6 +52,9 @@ export default function ItemModal({ isOpen, onClose, onSave, item = null, mode =
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState("");
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     if (item && mode === "edit") {
@@ -66,6 +86,11 @@ export default function ItemModal({ isOpen, onClose, onSave, item = null, mode =
         tags: "Must Try",
       });
     }
+    setSelectedFile(null);
+    setPreviewUrl("");
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
     setErrorMsg("");
   }, [item, mode, isOpen]);
 
@@ -79,6 +104,34 @@ export default function ItemModal({ isOpen, onClose, onSave, item = null, mode =
       sectionNumber: preset ? preset.sectionNumber : prev.sectionNumber,
       sectionEyebrow: preset ? preset.eyebrow : prev.sectionEyebrow,
     }));
+  };
+
+  const handleFileSelect = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      setErrorMsg("Please choose a valid image file (JPEG, PNG, WebP).");
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      setErrorMsg("Image size exceeds the 5MB limit.");
+      return;
+    }
+
+    setErrorMsg("");
+    setSelectedFile(file);
+    const objectUrl = URL.createObjectURL(file);
+    setPreviewUrl(objectUrl);
+  };
+
+  const handleClearFile = () => {
+    setSelectedFile(null);
+    setPreviewUrl("");
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   const handleTagToggle = (tag) => {
@@ -101,6 +154,10 @@ export default function ItemModal({ isOpen, onClose, onSave, item = null, mode =
       setErrorMsg("Dish name is required.");
       return;
     }
+    if (!formData.description.trim() || formData.description.trim().length < 5) {
+      setErrorMsg("Description must be at least 5 characters long.");
+      return;
+    }
     if (Number(formData.price) < 0 || isNaN(Number(formData.price))) {
       setErrorMsg("Please enter a valid price.");
       return;
@@ -110,19 +167,40 @@ export default function ItemModal({ isOpen, onClose, onSave, item = null, mode =
     setErrorMsg("");
 
     try {
-      const payload = {
-        ...formData,
-        price: Number(formData.price),
-        tags: formData.tags
-          ? formData.tags
-              .split(",")
-              .map((t) => t.trim())
-              .filter(Boolean)
-          : [],
-      };
-
       const targetId = item ? (item._id || item.id) : null;
-      await onSave(payload, targetId);
+      const tagsArray = formData.tags
+        ? formData.tags
+            .split(",")
+            .map((t) => t.trim())
+            .filter(Boolean)
+        : [];
+
+      if (selectedFile) {
+        // Send multipart form data for file upload directly to backend
+        const fd = new FormData();
+        fd.append("name", formData.name.trim());
+        fd.append("description", formData.description.trim());
+        fd.append("price", Number(formData.price));
+        fd.append("category", formData.category);
+        if (formData.sectionNumber) fd.append("sectionNumber", formData.sectionNumber);
+        if (formData.sectionEyebrow) fd.append("sectionEyebrow", formData.sectionEyebrow);
+        fd.append("isVegetarian", String(formData.isVegetarian));
+        fd.append("isAvailable", String(formData.isAvailable));
+        fd.append("isSpecial", String(formData.isSpecial));
+        fd.append("tags", JSON.stringify(tagsArray));
+        fd.append("image", selectedFile);
+
+        await onSave(fd, targetId);
+      } else {
+        // Send JSON payload
+        const payload = {
+          ...formData,
+          description: formData.description.trim(),
+          price: Number(formData.price),
+          tags: tagsArray,
+        };
+        await onSave(payload, targetId);
+      }
       onClose();
     } catch (err) {
       setErrorMsg(err.message || "Failed to save dish.");
@@ -236,7 +314,7 @@ export default function ItemModal({ isOpen, onClose, onSave, item = null, mode =
           {/* Description */}
           <div>
             <label className="block text-xs font-bold text-[#2b1810] mb-1.5">
-              Description &amp; Tasting Notes
+              Description &amp; Tasting Notes <span className="text-red-500">*</span>
             </label>
             <textarea
               rows={2}
@@ -244,36 +322,109 @@ export default function ItemModal({ isOpen, onClose, onSave, item = null, mode =
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               placeholder="Freshly prepared with authentic ingredients, spices, and artisanal touch..."
               className="w-full px-4 py-2.5 rounded-2xl bg-[#faf7f2] border border-[#e8ded3] text-xs text-[#2b1810] focus:outline-none focus:border-[#c88242]"
+              required
             />
           </div>
 
-          {/* Image URL with Live Thumbnail */}
+          {/* Dish Image: Device Upload or URL */}
           <div>
-            <label className="block text-xs font-bold text-[#2b1810] mb-1.5">
-              Image URL / Path
-            </label>
-            <div className="flex gap-3 items-center">
-              <div className="w-12 h-12 rounded-2xl bg-gray-100 border border-[#e8ded3] overflow-hidden shrink-0 flex items-center justify-center">
-                {formData.image ? (
-                  <img
-                    src={formData.image}
-                    alt="Preview"
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.target.src = "/tacos.jpg";
-                    }}
-                  />
-                ) : (
-                  <ImageIcon className="w-5 h-5 text-gray-400" />
-                )}
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="block text-xs font-bold text-[#2b1810]">
+                Dish Image
+              </label>
+              <span className="text-[11px] text-[#6b5c54]">
+                Upload from device or enter URL
+              </span>
+            </div>
+
+            {/* Hidden device file input */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleFileSelect}
+              className="hidden"
+            />
+
+            <div className="p-3 bg-[#faf7f2] border border-[#e8ded3] rounded-2xl space-y-2.5">
+              <div className="flex items-center gap-3">
+                {/* Thumbnail Preview */}
+                <div className="w-14 h-14 rounded-2xl bg-white border border-[#e8ded3] overflow-hidden shrink-0 flex items-center justify-center relative shadow-sm">
+                  {previewUrl || formData.image ? (
+                    <img
+                      src={previewUrl || formData.image}
+                      alt="Dish preview"
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.src = "/tacos.jpg";
+                      }}
+                    />
+                  ) : (
+                    <ImageIcon className="w-5 h-5 text-gray-400" />
+                  )}
+                  {previewUrl && (
+                    <div className="absolute bottom-0 inset-x-0 bg-[#2b1810]/80 text-[8px] font-bold text-[#e29b5a] text-center py-0.5">
+                      DEVICE
+                    </div>
+                  )}
+                </div>
+
+                {/* Upload Button & Selected File Info */}
+                <div className="flex-1 flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#2b1810] hover:bg-[#3d2318] active:scale-98 text-white text-xs font-bold transition-all shadow-sm cursor-pointer"
+                  >
+                    <Upload className="w-4 h-4 text-[#e29b5a]" />
+                    <span>Upload from Device</span>
+                  </button>
+
+                  {selectedFile ? (
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-[#2b1810]">
+                      <span className="font-semibold max-w-[180px] sm:max-w-[240px] truncate" title={selectedFile.name}>
+                        {selectedFile.name}
+                      </span>
+                      <span className="text-[10px] text-amber-800 shrink-0">
+                        ({(selectedFile.size / 1024).toFixed(0)} KB)
+                      </span>
+                      <button
+                        type="button"
+                        onClick={handleClearFile}
+                        title="Remove device image"
+                        className="w-4 h-4 rounded-full bg-amber-200 hover:bg-amber-300 text-amber-900 flex items-center justify-center text-[10px] ml-0.5 transition-colors"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  ) : (
+                    <span className="text-[11px] text-[#8c7a6b]">
+                      No device file chosen (PNG, JPG, WebP up to 5MB)
+                    </span>
+                  )}
+                </div>
               </div>
-              <input
-                type="text"
-                value={formData.image}
-                onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                placeholder="/tacos.jpg or https://images.unsplash.com/..."
-                className="flex-1 px-4 py-3 rounded-2xl bg-[#faf7f2] border border-[#e8ded3] text-xs text-[#2b1810] focus:outline-none focus:border-[#c88242]"
-              />
+
+              {/* Direct URL Input fallback */}
+              <div>
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-[11px] font-semibold text-[#6b5c54]">
+                    {selectedFile ? "Selected file will be uploaded. Clear file to use URL instead:" : "Or enter Image URL / local path:"}
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  disabled={Boolean(selectedFile)}
+                  value={formData.image}
+                  onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                  placeholder={selectedFile ? "Using file chosen from device above" : "/tacos.jpg or https://images.unsplash.com/..."}
+                  className={`w-full px-4 py-2.5 rounded-xl text-xs transition-colors ${
+                    selectedFile
+                      ? "bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed"
+                      : "bg-white border border-[#e8ded3] text-[#2b1810] focus:outline-none focus:border-[#c88242]"
+                  }`}
+                />
+              </div>
             </div>
           </div>
 

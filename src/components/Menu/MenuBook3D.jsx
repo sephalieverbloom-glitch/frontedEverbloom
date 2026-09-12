@@ -19,6 +19,7 @@ import {
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import { ADDRESS, PHONE_PRIMARY, PHONE_SECONDARY } from "../../const";
+import api from "../../lib/api";
 
 // Comprehensive Booklet Pages matching the official menu
 const allMenuPages = [
@@ -253,12 +254,80 @@ export default function MenuBook3D() {
   const [windowWidth, setWindowWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1024);
   const isMobile = windowWidth < 768;
 
+  const [pages, setPages] = useState(allMenuPages);
+
+  useEffect(() => {
+    let isMounted = true;
+    async function loadLiveBookPages() {
+      try {
+        const res = await api.getGroupedMenu();
+        if (isMounted && res && res.data && Array.isArray(res.data) && res.data.length > 0) {
+          const livePages = [];
+          // Page 0: Cover
+          livePages.push(allMenuPages[0]);
+          // Page 1: Philosophy
+          livePages.push(allMenuPages[1]);
+
+          let pageNum = 2;
+          res.data.forEach((sec) => {
+            const chunkSize = 8;
+            for (let i = 0; i < sec.items.length; i += chunkSize) {
+              const slice = sec.items.slice(i, i + chunkSize);
+              livePages.push({
+                type: "menu",
+                pageNumber: pageNum++,
+                category: (sec.title || "MENU").toUpperCase(),
+                subtitle: sec.eyebrow || "Prepared fresh to order",
+                items: slice.map((it) => ({
+                  name: it.name,
+                  price: it.price,
+                  isVeg: it.isVegetarian !== false,
+                  badge: it.tags?.[0] || (it.isSpecial ? "Special" : null),
+                })),
+              });
+            }
+          });
+
+          // Even page count before back cover
+          if (livePages.length % 2 !== 0) {
+            livePages.push({
+              type: "editorial",
+              pageNumber: pageNum++,
+              eyebrow: "CHEF'S SANCTUARY",
+              title: "Artisanal Experience",
+              quote: "Pure craft, soulful recipes, and endless blooming memories.",
+              text: "Every cup brewed and every dish served at Everbloom is a celebration of quality and community.",
+              features: ["Fresh Ingredients", "Prepared with Love", "Locally Sourced", "Hygiene First"],
+              image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80",
+            });
+          }
+
+          // Back covers
+          livePages.push({
+            ...allMenuPages[allMenuPages.length - 2],
+            pageNumber: pageNum++,
+          });
+          livePages.push(allMenuPages[allMenuPages.length - 1]);
+
+          setPages(livePages);
+        }
+      } catch (err) {
+        console.warn("Could not load dynamic book pages from API, using fallback:", err.message);
+      }
+    }
+
+    loadLiveBookPages();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   // Desktop 2-page spread state (spreads / leaves)
-  const totalPages = allMenuPages.length; // 14 pages (0 to 13)
-  const totalLeaves = Math.floor(totalPages / 2); // 7 leaves (0 to 6)
+  const totalPages = pages.length;
+  const totalLeaves = Math.floor(totalPages / 2);
   const [flippedLeaves, setFlippedLeaves] = useState([]);
   
-  // Mobile single-page state (pages: 0 to 13)
+  // Mobile single-page state
   const [mobilePage, setMobilePage] = useState(0);
   const [mobileDirection, setMobileDirection] = useState("next");
 
@@ -744,7 +813,7 @@ export default function MenuBook3D() {
                   transition={{ duration: 0.35, ease: "easeInOut" }}
                   className="w-full h-full [transform-origin:left_center]"
                 >
-                  {renderPage(allMenuPages[mobilePage])}
+                  {pages[mobilePage] && renderPage(pages[mobilePage])}
                 </motion.div>
               </AnimatePresence>
             </motion.div>
@@ -776,8 +845,8 @@ export default function MenuBook3D() {
                 const isFlipped = flippedLeaves.includes(leafIndex);
                 const zIndex = isFlipped ? 10 + leafIndex : 40 - leafIndex;
 
-                const frontPageData = allMenuPages[leafIndex * 2];
-                const backPageData = allMenuPages[leafIndex * 2 + 1];
+                const frontPageData = pages[leafIndex * 2];
+                const backPageData = pages[leafIndex * 2 + 1];
 
                 return (
                   <DesktopLeaf

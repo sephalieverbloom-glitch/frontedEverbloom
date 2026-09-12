@@ -16,11 +16,27 @@ import { menuApi } from "../../../lib/api";
 
 const menuCategories = [
   "All Items",
-  "Starters & Wraps",
-  "Pizzas & Burgers",
-  "Pastas & Mains",
-  "Signature Coolers",
-  "Coffee & Desserts",
+  "Light Bites",
+  "Egg Delights",
+  "Sandwiches",
+  "Pasta Favourites",
+  "Crafted Burgers",
+  "Wrapped & Ready",
+  "Hand Made Pizzas",
+  "House Special Momos",
+  "Soups & Bowls",
+  "Starters & Wok Delights",
+  "Maggi Remixes",
+  "Rice & Noodle Bowls",
+  "Hot Coffee Blends",
+  "Cold Coffee Creations",
+  "Chai Pe Charcha",
+  "Iced Teas",
+  "Milkshakes",
+  "Mocktails & Coolers",
+  "Slushies",
+  "Desserts & Brownies",
+  "Add-Ons & Extras",
 ];
 
 export default function MenuSection({ menu = [], onRefresh }) {
