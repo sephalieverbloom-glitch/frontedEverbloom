@@ -171,7 +171,7 @@ export default function Navbar() {
                 />
               </div>
               <div className="flex items-center justify-between text-xs text-[#6b5c54] px-1">
-                <span>1:00 PM – 11:00 PM</span>
+                <span>1:00 PM – 10:15 PM</span>
                 <a href="tel:09437164578" className="font-bold text-[#1c1109] hover:underline">
                   094371 64578
                 </a>

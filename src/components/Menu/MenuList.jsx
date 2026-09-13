@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router";
-import { 
-  Sparkles, 
-  UtensilsCrossed, 
-  Loader2, 
-  ChevronLeft, 
-  ChevronRight, 
+import {
+  Sparkles,
+  UtensilsCrossed,
+  Loader2,
+  ChevronLeft,
+  ChevronRight,
   Search,
   Filter
 } from "lucide-react";
@@ -223,11 +223,10 @@ export default function MenuList() {
                   <button
                     key={cat}
                     onClick={() => handleCategorySelect(cat)}
-                    className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
-                      isSelected
-                        ? "bg-[#c88242] text-white shadow-md scale-105"
-                        : "bg-[#faf7f2] text-[#6b5c54] hover:bg-[#e8ded3] hover:text-[#1c1109]"
-                    }`}
+                    className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${isSelected
+                      ? "bg-[#c88242] text-white shadow-md scale-105"
+                      : "bg-[#faf7f2] text-[#6b5c54] hover:bg-[#e8ded3] hover:text-[#1c1109]"
+                      }`}
                   >
                     {cat}
                   </button>
@@ -239,26 +238,23 @@ export default function MenuList() {
             <div className="shrink-0 flex items-center bg-[#faf7f2] p-1 rounded-full border border-[#e8ded3]">
               <button
                 onClick={() => { setDietFilter("ALL"); setCurrentPage(1); }}
-                className={`px-3 py-1 text-[11px] font-bold rounded-full transition-colors ${
-                  dietFilter === "ALL" ? "bg-white text-[#1c1109] shadow-xs" : "text-[#6b5c54]"
-                }`}
+                className={`px-3 py-1 text-[11px] font-bold rounded-full transition-colors ${dietFilter === "ALL" ? "bg-white text-[#1c1109] shadow-xs" : "text-[#6b5c54]"
+                  }`}
               >
                 All
               </button>
               <button
                 onClick={() => { setDietFilter("VEG"); setCurrentPage(1); }}
-                className={`px-3 py-1 text-[11px] font-bold rounded-full transition-colors flex items-center gap-1 ${
-                  dietFilter === "VEG" ? "bg-emerald-600 text-white shadow-xs" : "text-[#6b5c54]"
-                }`}
+                className={`px-3 py-1 text-[11px] font-bold rounded-full transition-colors flex items-center gap-1 ${dietFilter === "VEG" ? "bg-emerald-600 text-white shadow-xs" : "text-[#6b5c54]"
+                  }`}
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-300" />
                 Veg
               </button>
               <button
                 onClick={() => { setDietFilter("NON_VEG"); setCurrentPage(1); }}
-                className={`px-3 py-1 text-[11px] font-bold rounded-full transition-colors flex items-center gap-1 ${
-                  dietFilter === "NON_VEG" ? "bg-red-600 text-white shadow-xs" : "text-[#6b5c54]"
-                }`}
+                className={`px-3 py-1 text-[11px] font-bold rounded-full transition-colors flex items-center gap-1 ${dietFilter === "NON_VEG" ? "bg-red-600 text-white shadow-xs" : "text-[#6b5c54]"
+                  }`}
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-red-300" />
                 Non-Veg
@@ -325,9 +321,8 @@ export default function MenuList() {
                   {/* Veg / Non-Veg Indicator */}
                   <div className="absolute top-4 left-4 p-1.5 rounded-full bg-white/95 backdrop-blur-md shadow-md">
                     <div
-                      className={`w-2.5 h-2.5 rounded-full ${
-                        item.isVegetarian ? "bg-emerald-600" : "bg-red-600"
-                      }`}
+                      className={`w-2.5 h-2.5 rounded-full ${item.isVegetarian ? "bg-emerald-600" : "bg-red-600"
+                        }`}
                       title={item.isVegetarian ? "Vegetarian" : "Non-Vegetarian"}
                     />
                   </div>
@@ -397,11 +392,10 @@ export default function MenuList() {
                   <button
                     key={num}
                     onClick={() => handlePageChange(num)}
-                    className={`w-8 h-8 rounded-xl text-xs font-bold transition-all ${
-                      isCurrent
-                        ? "bg-[#c88242] text-white shadow-sm"
-                        : "bg-[#faf7f2] text-[#6b5c54] border border-[#e8ded3] hover:bg-[#e8ded3] hover:text-[#1c1109]"
-                    }`}
+                    className={`w-8 h-8 rounded-xl text-xs font-bold transition-all ${isCurrent
+                      ? "bg-[#c88242] text-white shadow-sm"
+                      : "bg-[#faf7f2] text-[#6b5c54] border border-[#e8ded3] hover:bg-[#e8ded3] hover:text-[#1c1109]"
+                      }`}
                   >
                     {num}
                   </button>

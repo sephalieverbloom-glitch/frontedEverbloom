@@ -28,7 +28,7 @@ export default function HeroSection() {
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0 shadow-[0_0_10px_#34d399]" />
           <span className="text-amber-200">🌸 Bhubaneswar's Floral Ambiance</span>
           <span className="text-white/40 hidden xs:inline">·</span>
-          <span className="text-white/95">Open Daily 1 PM – 10:45 PM</span>
+          <span className="text-white/95">Open Daily 1 PM – 10:15 PM</span>
         </div>
 
         {/* Headline with Glowing Rose-Amber Bloom Gradient */}
@@ -121,7 +121,7 @@ export default function HeroSection() {
               <Clock className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <p className="text-xs font-bold text-white leading-tight">1 PM – 11 PM</p>
+              <p className="text-xs font-bold text-white leading-tight">1 PM – 10:15 PM</p>
               <p className="text-[10px] text-amber-200/80 leading-tight mt-0.5">Open Daily</p>
             </div>
           </div>

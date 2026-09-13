@@ -48,7 +48,7 @@ export default function VisitCTASection() {
         <div className="pt-8 border-t border-white/15 flex flex-wrap items-center justify-center gap-6 text-xs text-white/60">
           <span className="flex items-center gap-1.5">
             <Clock className="w-3.5 h-3.5 text-[#e29b5a]" />
-            Open Daily: 1:00 PM – 10:30 PM
+            Open Daily: 1:00 PM –10:15 PM
           </span>
           <span className="hidden sm:inline">•</span>
           <span className="flex items-center gap-1.5">

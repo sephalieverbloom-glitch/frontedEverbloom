@@ -18,7 +18,7 @@ export default function SeoFaqSection() {
     },
     {
       q: "What are the operating hours and location of Everbloom Café?",
-      a: "Everbloom Café is open 7 days a week from 1:00 PM to 11:00 PM. We are located at K-8/796, Near SUM Ultimate Medicare, K8 Kalinga Nagar, Bhubaneswar, Odisha 751029 with convenient parking.",
+      a: "Everbloom Café is open 7 days a week from 1:00 PM to 10:15 PM. We are located at K-8/796, Near SUM Ultimate Medicare, K8 Kalinga Nagar, Bhubaneswar, Odisha 751029 with convenient parking.",
       badge: "Daily 1 PM – 11 PM",
     },
     {

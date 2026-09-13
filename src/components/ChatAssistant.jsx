@@ -18,7 +18,7 @@ function getCafeReply(query) {
     return "Everbloom Café is located at K-8/796, Near Sum Ultimate Medicare, K8 Kalinga Nagar, Bhubaneswar, Odisha 751029. We're easily accessible with convenient parking!";
   }
   if (q.includes("time") || q.includes("timing") || q.includes("open") || q.includes("hour") || q.includes("close")) {
-    return "We are open 7 days a week from 1:00 PM to 11:00 PM. Perfect for late lunches, evening hangouts, and dinners!";
+    return "We are open 7 days a week from 1:00 PM to 10:15 PM. Perfect for late lunches, evening hangouts, and dinners!";
   }
   if (q.includes("menu") || q.includes("food") || q.includes("eat") || q.includes("dish") || q.includes("special")) {
     return "Our top specials include the Everbloom Berry Blossom Cooler, Crispy Peri-Peri Chicken Wrap, Wood-Fired Margherita Pizza, Classic Aglio Olio Pasta, and Blueberry Baked Cheesecake! Check our Menu tab for the full list.";

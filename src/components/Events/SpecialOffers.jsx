@@ -39,7 +39,7 @@ export default function SpecialOffers() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="font-display text-3xl sm:text-4xl text-[#2b1810] font-extrabold mb-4">Join Us This Week</h2>
           <p className="text-sm sm:text-base text-[#6b5c54] mb-8 leading-relaxed max-w-2xl mx-auto">
-            Drop in anytime from 1:00 PM till 11:00 PM daily at Kalinga Nagar, Bhubaneswar.
+            Drop in anytime from 1:00 PM till 10:15 PM daily at Kalinga Nagar, Bhubaneswar.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/booking" className="btn-caramel px-6 py-3 text-xs font-bold gap-2">

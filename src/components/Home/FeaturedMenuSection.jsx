@@ -125,11 +125,10 @@ export default function FeaturedMenuSection() {
               <button
                 key={cat}
                 onClick={() => setActiveFilter(cat)}
-                className={`px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 ${
-                  isSelected
+                className={`px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 ${isSelected
                     ? "bg-[#2b1810] text-white shadow-md scale-105"
                     : "bg-[#faf7f2] hover:bg-[#e8ded3] text-[#6b5c54] border border-[#e8ded3]"
-                }`}
+                  }`}
               >
                 {cat === "ALL" ? "All Signatures" : cat}
               </button>
@@ -164,9 +163,8 @@ export default function FeaturedMenuSection() {
                     {/* Veg / Non-Veg Indicator */}
                     <div className="absolute top-4 left-4 p-1.5 rounded-full bg-white/95 backdrop-blur-md shadow-md">
                       <div
-                        className={`w-2.5 h-2.5 rounded-full ${
-                          dish.isVegetarian !== false ? "bg-emerald-600" : "bg-red-600"
-                        }`}
+                        className={`w-2.5 h-2.5 rounded-full ${dish.isVegetarian !== false ? "bg-emerald-600" : "bg-red-600"
+                          }`}
                         title={dish.isVegetarian !== false ? "Vegetarian" : "Non-Vegetarian"}
                       />
                     </div>

@@ -48,7 +48,7 @@ export default function HighlightsSection() {
     },
     {
       icon: Clock,
-      title: "Open Daily 1 PM – 10:30 PM",
+      title: "Open Daily 1 PM –10:15 PM",
       desc: "Serving fresh lunch, afternoon cold brews, and late evening dinners seven days a week.",
       tag: "All Week Long",
       color: "text-purple-600 bg-purple-100",

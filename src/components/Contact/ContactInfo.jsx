@@ -112,7 +112,7 @@ export default function ContactInfo() {
             <div>
               <h3 className="font-display text-sm font-bold text-[#2b1810] mb-1">Operating Hours</h3>
               <p className="text-xs font-bold text-emerald-700">Open 7 Days a Week</p>
-              <p className="text-xs text-[#6b5c54] mt-0.5">1:00 PM – 11:00 PM</p>
+              <p className="text-xs text-[#6b5c54] mt-0.5">1:00 PM – 10:15 PM</p>
             </div>
           </div>
         </div>

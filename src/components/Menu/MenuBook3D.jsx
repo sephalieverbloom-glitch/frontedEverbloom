@@ -235,7 +235,7 @@ const allMenuPages = [
     type: "backCover",
     title: "THANK YOU · VISIT AGAIN",
     subtitle: "Where good food and good mood bloom together.",
-    timings: "Open Daily: 1:00 PM – 11:00 PM",
+    timings: "Open Daily: 1:00 PM – 10:15 PM",
     address: "K-8/796, Near SUM Ultimate Medicare, K8 Kalinga Nagar, Bhubaneswar 751029",
     phones: ["+91 70770 30566", "+91 97787 95952", "+91 94371 64578"],
     social: "Follow us on Instagram & Zomato",
