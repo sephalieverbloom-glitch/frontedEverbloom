@@ -76,7 +76,7 @@ export default function HeroSection() {
             <Trees className="w-3 h-3 text-emerald-300" /> Garden Patio
           </span>
           <span className="px-3 py-1.5 rounded-full bg-amber-950/70 backdrop-blur-xl border border-amber-400/40 text-amber-200 flex items-center gap-1.5 shadow-md">
-            <Clock className="w-3 h-3 text-amber-300" /> 1–11 PM
+            <Clock className="w-3 h-3 text-amber-300" /> 1–10:15 PM
           </span>
         </div>
 
